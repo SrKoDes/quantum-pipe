@@ -1,8 +1,6 @@
 
 <h1 align=center>Final Project</h1>
 
-Congratulations! You have made it to the final stretch of your journey here at Kura Labs. Take a second to look back and see how far you've come!
-
 Introducing the Final Project! This project will be a culmination of all of your efforts throughout Kura and combine many of the DevOps techonologies you have learned throughout the last few months.
 
 ## High Level Requirements
