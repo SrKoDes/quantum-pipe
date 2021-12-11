@@ -17,26 +17,6 @@ Introducing the Final Project! This project will be a culmination of all of your
 
 Your project *must* contain all of the 7 components above but the specific technologies you use and how you use them is up to your team to decide. The guidelines above are meant as possible technology choices but not meant to be an exhaustive list. Discuss with your team what you would want to include from each category and start building!
 
-## Who Am I Working With?
-
-Let's take some time to introduce everyone to their respective teams:
-  
-  * **Team 1:** Alex, Cleon, Franklin, Juan
-  * **Team 2:** Andrew, Darren, Denzel, Xavier
-  * **Team 3:** Dilobar, Kawang, Ricardo
-  * **Team 4:** Ibrahima, Kenneth, Nabeel
-  * **Team 5:** Bishajit, Jespson, Levy , Maisha
-  * **Team 6:** Hector, Ian, Jodi, Kohiin
-  * **Team 7:** Brittney, Mohamed, Sai, Zach
-
-## How Should Our Team Work Together?
-
-Your team is expected to meet daily (on weekdays) and conduct a standup, mimicing what your team would be doing in an agile DevOps role. Tasks will be broken down into discrete, actionable items using GitHub projects and work will be assigned to each team member. We will go over this process as a class in the coming weeks.
-
-## Project Deliverables
-
-The Final Project is divided into 6 deliverables, each building on top of skills learned previously to scaffold students' learning over the entire course.
-
 ### Part 1: Agree on a Project & Plan it Out
 
 Pitch us on potential ideas for an end-to-end DevOps project. Think of topics you’re passionate about, knowledge you’re familiar with, or problems relevant to to industries you’d like to work with.
