@@ -12,8 +12,8 @@ provider "aws" {
   region = "us-east-1"
   default_tags {
     tags = {
-      Deployment = "DEPLOYMENT_09_TERRAFORM"
-      Team       = "Kura Labs"
+      Deployment = "Pipe In A Pipe"
+      Team       = "Kura Team 6"
     }
   }
 }

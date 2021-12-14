@@ -69,11 +69,7 @@ resource "aws_internet_gateway" "ig1" {
   }
 }
 
-
-
 # Route table
-
-
 resource "aws_route_table" "test-route-table" {
   vpc_id = aws_vpc.main.id
 
@@ -86,7 +82,6 @@ resource "aws_route_table" "test-route-table" {
     "Name" = "tf-route-table-test"
   }
 }
-
 
 resource "aws_route_table_association" "public01" {
   subnet_id      = aws_subnet.public01.id
@@ -116,9 +111,7 @@ resource "aws_route_table_association" "private01" {
   route_table_id = aws_route_table.tf-private-route-table.id
 }
 
-
-
-#eIP
+#EIP
 
 resource "aws_eip" "tf-eip" {
   vpc = true
@@ -133,7 +126,6 @@ resource "aws_nat_gateway" "nat-gw1" {
   }
   depends_on = [aws_internet_gateway.ig1]
 }
-
 
 # Create SG 4 ALB 
 resource "aws_security_group" "ALB-sg" {
@@ -194,7 +186,6 @@ resource "aws_security_group" "priv_ec2" {
 }
 
 # SG for DB
-
 resource "aws_security_group" "postgres-sg" {
   name        = "d9-db-sg"
   description = "Allow traffic from ec2 only"
@@ -226,7 +217,6 @@ resource "aws_instance" "EC2" {
 }
 
 # Create ALB
-
 resource "aws_lb" "ALB" {
   name               = "ALB"
   internal           = false
@@ -245,8 +235,7 @@ resource "aws_lb" "ALB" {
   }
 }
 
-#target groups
-
+#Target groups
 resource "aws_lb_target_group" "d9-tg" {
   name     = "deploy9-target-group"
   port     = 80
@@ -270,7 +259,6 @@ resource "aws_lb_listener" "d9-tg-listen" {
     target_group_arn = aws_lb_target_group.d9-tg.arn
   }
 }
-
 
 # Create DATABASE
 
