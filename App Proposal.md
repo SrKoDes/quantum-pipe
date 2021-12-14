@@ -7,5 +7,7 @@ It will be initially compatible with Flask and React apps. We will use Terraform
 
 ### How it Works
 
-Users accessing our app will be able to input a link to a github repository. Our app will take the code, and provision an EC2 and install the necessary dependencies to run the desired application. It will run the app and then return a URL so that the user can access their app.
+Users accessing our app will be able to input a link to a github repository. Our app will take the code, and create a Docker container and install the necessary dependencies to run the desired application. The container will run the app and then return a URL so that the user can access their app.
+
+***References to System Design***
 
