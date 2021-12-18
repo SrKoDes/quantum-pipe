@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -29,16 +30,24 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
+
     console.log({
       email: data.get('email'),
       password: data.get('password'),
     });
   };
-
+  
+  async function getToken(){
+    await fetch('https://github.com/login/oauth/authorize?response_type=code&client_id=8a229a05cd1fd0ff5c1e&client_secret=14e53e17644c5a41591440a0b8bddaf2a2d6b500')
+    .then(response => response.json())
+    .then(data => console.log(data));
+  }
+  useEffect(()=>{getToken()},[])
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -58,41 +67,24 @@ export default function SignIn() {
             Sign in
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
+            
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            <Link href="https://github.com/login/oauth/authorize?client_id=8a229a05cd1fd0ff5c1e&client_secret=14e53e17644c5a41591440a0b8bddaf2a2d6b500">
             <Button
-              type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+
             >
               Sign In
             </Button>
+            </Link>
             <Grid container>
               <Grid item xs>
-                <Link href="https://github.com/login/oauth/authorize?scope=hector_6921@hotmail.com&client_id=8a229a05cd1fd0ff5c1e" variant="body2">
+                <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>

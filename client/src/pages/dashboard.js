@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import { useEffect } from 'react';
 import Typography from '@mui/material/Typography';
 import DenseTable from '../components/densetable';
 import Link from '@mui/material/Link';
@@ -31,7 +31,7 @@ function DashboardContent() {
   };
 
   async function getUserData(){
-    await fetch('https://api.github.com/users/hector6921/repos')
+    await fetch('https://api.github.com/users//repos')
     .then(res => res.json())
     // .then(data=>console.log(data.map(item=>item)))
     .then(data=>setuData(data))
@@ -40,7 +40,7 @@ function DashboardContent() {
   }
 
   async function getUserProfileData(){
-    await fetch('https://api.github.com/users/hector6921')
+    await fetch('https://api.github.com/users/')
     .then(res => res.json())
     // .then(data=>console.log(data.map(item=>item)))
     .then(data=>setpData(data))
@@ -49,6 +49,9 @@ function DashboardContent() {
   }
 React.useEffect(()=>{getUserData()},[])
 React.useEffect(()=>{getUserProfileData()},[])
+
+
+useEffect(()=>{getToken()},[])
 
 function getRepoInfo(){
   setRepoInfo(udata.map((item,index)=>({"name":item.name,"clone_url":item.clone_url,"url":item.html_url})))
