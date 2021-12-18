@@ -54,7 +54,7 @@ function getRepoInfo(){
   setRepoInfo(udata.map((item,index)=>({"name":item.name,"clone_url":item.clone_url,"url":item.html_url})))
 }
 React.useEffect(()=>{getRepoInfo()},[udata])
-
+console.log(repoInfo)
   return (
 <Container style={{display:'flex',padding:'5%'}}> 
 
