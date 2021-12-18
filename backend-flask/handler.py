@@ -8,11 +8,8 @@ def build_app(url):
     return None
 
 
-
-
 def get_folder(url):
     repo_folder = url.split("/", 4)[4].split(".")[0]
-
 
     return repo_folder
 
