@@ -16,7 +16,7 @@ session_username = ""
 def exchange_token():
     exchange_code = request.args.get('code')
     github_token_exhange = requests.post('https://github.com/login/oauth/access_token', data= {"code":exchange_code})
-    print(exchange_code)
+    print(github_token_exhange)
     
     return "hello"
 
