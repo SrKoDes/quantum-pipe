@@ -36,26 +36,10 @@ def display_dashboard():
 @application.route('/getGithubToken')
 def exchange_token():
     exchange_code = str(request.args.get('code'))
-    
-    # json_fcm_data = {"client_id": '0923bbef1520f84ac3e1', "client_secret": '9e75000e02defa3b5e7abe31ccb4fc16860370b7', "code": exchange_code}
-    
-    # json_string = json.dumps(json_fcm_data)
-
-    # headers = {'Accept': 'application/json'}
-
-    # r = requests.post("https://github.com/login/oauth/access_token", headers=headers, data=json_fcm_data)
-
-    # data = jsonify(r)
-    # rr = Response(json.dumps(data), mimetype = 'application/json')
-    
-    github_token_exhange = requests.post(f"https://github.com/login/oauth/access_token?code={exchange_code}?client_id=0923bbef1520f84ac3e1?client_secret=9e75000e02defa3b5e7abe31ccb4fc16860370b7")
-    # json_token = github_token_exhange[0]
-    response = Response(json.dumps(github_token_exhange), status = '200', mimetype = 'application/json')
-    # # print("hello")
-
-    # return rr
-    return render_template('home.html', r=response)
-
+    json_fcm_data = {'client_id': '0923bbef1520f84ac3e1', 'client_secret': '9e75000e02defa3b5e7abe31ccb4fc16860370b7', 'code': exchange_code}
+    json_header = {'Accept': 'application/json'}
+    response = requests.post("https://github.com/login/oauth/access_token", headers=json_header, json=json_fcm_data)
+    return render_template('home.html', r=response.text)
 
 # Deploys the customer's app
 @application.route('/start_deployment')
