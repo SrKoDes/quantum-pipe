@@ -72,7 +72,7 @@ export default function SignIn() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Link href="https://github.com/login/oauth/authorize?client_id=8a229a05cd1fd0ff5c1e&client_secret=14e53e17644c5a41591440a0b8bddaf2a2d6b500">
+            <Link href="https://github.com/login/oauth/authorize?client_id=8a229a05cd1fd0ff5c1e">
             <Button
               fullWidth
               variant="contained"
