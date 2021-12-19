@@ -42,12 +42,12 @@ export default function SignIn() {
     });
   };
   
-  async function getToken(){
-    await fetch('https://github.com/login/oauth/authorize?response_type=code&client_id=8a229a05cd1fd0ff5c1e&client_secret=14e53e17644c5a41591440a0b8bddaf2a2d6b500')
-    .then(response => response.json())
-    .then(data => console.log(data));
-  }
-  useEffect(()=>{getToken()},[])
+  // async function getToken(){
+  //   await fetch('https://github.com/login/oauth/authorize?response_type=code&client_id=8a229a05cd1fd0ff5c1e&client_secret=14e53e17644c5a41591440a0b8bddaf2a2d6b500')
+  //   .then(response => response.json())
+  //   .then(data => console.log(data));
+  // }
+  // useEffect(()=>{getToken()},[])
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">

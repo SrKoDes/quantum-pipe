@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, Response
+import requests
 import handler
 import json
 
@@ -10,6 +11,14 @@ session_username = ""
 # def home():
 #     handler.build_app()
 #     render_template('home.html')
+
+@application.route('/getGithubToken')
+def exchange_token():
+    exchange_code = request.args.get('code')
+    github_token_exhange = requests.post('https://github.com/login/oauth/access_token', data= {"code":exchange_code})
+    print(exchange_code)
+    
+    return "hello"
 
 
 # Pulls username
