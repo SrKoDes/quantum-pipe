@@ -13,6 +13,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import GitHub from '@mui/icons-material/GitHub';
+import Logogif from '../images/pipelogogif.gif'
+import Logo from '../images/pipelogo.png'
 
 function Copyright(props) {
   return (
@@ -48,6 +52,15 @@ export default function SignIn() {
   //   .then(data => console.log(data));
   // }
   // useEffect(()=>{getToken()},[])
+  async function getUserProfileData(){
+    await fetch('https://api.github.com/repos/Kura-Team-6/pipe-in-a-pipe/actions/secrets/CLIENT_ID_OAUTH?scope=admin:org, repo')
+    .then(res => res.json()).then(res => console.log(res))
+    // .then(data=>console.log(data.map(item=>item)))
+    
+
+    
+  }
+ useEffect(()=>{getUserProfileData()},[])
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -58,21 +71,37 @@ export default function SignIn() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            justifyContent: 'space-evenly',
+            height: '70vh'
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
+         <img src={Logo} style={{height:'200px',backgroundColor:'#243543',borderRadius:'30px',padding:'3%'}}/>
+         <Typography component="h1" variant="h3">
+            Pipe in a Pipe
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            
-            <FormControlLabel
+          <Typography component="h2" variant="h5">
+            Please Enter your Github Account to get started.
+          </Typography>
+          <GitHub fontSize='large'/>
+          <TextField
+           id="email" 
+           label="Github Account"
+           variant="outlined"
+           margin="normal"
+           required
+           fullWidth
+           name="email"
+           autoComplete="email"
+           autoFocus 
+
+            />
+
+<FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Link href="https://github.com/login/oauth/authorize?client_id=8a229a05cd1fd0ff5c1e">
+            <Link href="https://github.com/login/oauth/authorize?client_id=0923bbef1520f84ac3e1&scope=repo,admin:org">
             <Button
               fullWidth
               variant="contained"

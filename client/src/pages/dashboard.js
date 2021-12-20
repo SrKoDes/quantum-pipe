@@ -24,48 +24,39 @@ function Copyright(props) {
 function DashboardContent() {
   const [open, setOpen] = React.useState(true);
   const [udata, setuData] = React.useState([]);
-  const [pdata, setpData] = React.useState([]);
+  // const [pdata, setpData] = React.useState([]);
   const [repoInfo, setRepoInfo] = React.useState([]);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
   async function getUserData(){
-    await fetch('https://api.github.com/users//repos')
+    await fetch('http://localhost:5000/dashboard')
     .then(res => res.json())
     // .then(data=>console.log(data.map(item=>item)))
     .then(data=>setuData(data))
 
     
   }
-
-  async function getUserProfileData(){
-    await fetch('https://api.github.com/users/')
-    .then(res => res.json())
-    // .then(data=>console.log(data.map(item=>item)))
-    .then(data=>setpData(data))
-
-    
-  }
+  
 React.useEffect(()=>{getUserData()},[])
-React.useEffect(()=>{getUserProfileData()},[])
+// React.useEffect(()=>{getUserProfileData()},[])
 
+// useEffect(()=>{getToken()},[])
 
-useEffect(()=>{getToken()},[])
-
-function getRepoInfo(){
-  setRepoInfo(udata.map((item,index)=>({"name":item.name,"clone_url":item.clone_url,"url":item.html_url})))
-}
-React.useEffect(()=>{getRepoInfo()},[udata])
-console.log(repoInfo)
+// function getRepoInfo(){
+//   setRepoInfo(udata.map((item,index)=>({"name":item.name,"clone_url":item.clone_url,"url":item.html_url})))
+// }
+// React.useEffect(()=>{getRepoInfo()},[udata])
+// console.log(repoInfo)
   return (
 <Container style={{display:'flex',padding:'5%'}}> 
 
-<BasicCard photo={pdata.avatar_url} name={pdata.name} userName={pdata.login} url={pdata.html_url}/>
+<BasicCard photo={udata.avatar_url} name={udata.name} userName={udata.login} url={udata.html_url}/>
 
 
 <Container style={{height:'500px',width:'600px',overflow:'scroll'}}>
-<DenseTable data={repoInfo} />
+{/* <DenseTable data={repoInfo} /> */}
 
 </Container>
  </Container>

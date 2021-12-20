@@ -2,6 +2,7 @@ import subprocess
 import json
 from urllib.request import urlopen
 from operator import itemgetter
+import requests
 
 def build_app(url):
     # Using the URL for the repo, run the build script on the repo's application
@@ -38,14 +39,14 @@ def get_repos(url):
     return list_of_repos, list_of_urls
 
 
-def get_user_info(url):
+def get_user_info(auth_token):
     # Get the user info to populate webpage
     user_data = []
-    user_keys = ['avatar_url','name','login']
+    user_keys = ['avatar_url','name','login','html_url']
 
     # Get API response
-    response = urlopen(url)
-    full_api_call = json.loads(response.read())
+    response = requests.get('https://api.github.com/user',headers={'Authorization':f"token {auth_token}"})
+    full_api_call = json.loads(response.text)
     
     # Pull relevant information
     user_data = itemgetter(*user_keys)(full_api_call)
