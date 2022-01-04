@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import Typography from '@mui/material/Typography';
 import DenseTable from '../components/densetable';
 import Link from '@mui/material/Link';
 import { Card, Container } from '@mui/material';
 import BasicCard from '../components/profileCard';
-
+import loadingLogo from '../images/pipelogogif.gif'
 
 function Copyright(props) {
   return (
@@ -24,6 +24,7 @@ function Copyright(props) {
 function DashboardContent() {
   const [open, setOpen] = React.useState(true);
   const [udata, setuData] = React.useState([]);
+  const [isUdataReady, setUdataReady] = React.useState(false)
   // const [pdata, setpData] = React.useState([]);
   const [repoInfo, setRepoInfo] = React.useState([]);
   const toggleDrawer = () => {
@@ -35,11 +36,14 @@ function DashboardContent() {
     .then(res => res.json())
     // .then(data=>console.log(data.map(item=>item)))
     .then(data=>setuData(data))
+    .then(data=>console.log(data))
+    setUdataReady(true)
 
     
   }
   
-React.useEffect(()=>{getUserData()},[])
+React.useLayoutEffect(()=>{getUserData()},[])
+console.log(udata.repos)
 // React.useEffect(()=>{getUserProfileData()},[])
 
 // useEffect(()=>{getToken()},[])
@@ -49,19 +53,32 @@ React.useEffect(()=>{getUserData()},[])
 // }
 // React.useEffect(()=>{getRepoInfo()},[udata])
 // console.log(repoInfo)
+
+if(isUdataReady===true){
+
   return (
 <Container style={{display:'flex',padding:'5%'}}> 
 
-<BasicCard photo={udata.avatar_url} name={udata.name} userName={udata.login} url={udata.html_url}/>
+<BasicCard photo={udata.user_info[0]} name={udata.user_info[1]} userName={udata.user_info[2]} url={udata.user_info[3]}/>
 
 
 <Container style={{height:'500px',width:'600px',overflow:'scroll'}}>
-{/* <DenseTable data={repoInfo} /> */}
+<DenseTable data={udata.repos} />
 
 </Container>
  </Container>
   );
+}else{
+  return(
+<Container>
+  <Typography>Loading...</Typography>
+  <img style={{width:'300px'}} src={loadingLogo} />
+</Container>
+  );
 }
+}
+
+
 
 export default function Dashboard() {
   return <DashboardContent />;
