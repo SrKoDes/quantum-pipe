@@ -1,5 +1,5 @@
 from subprocess import list2cmdline
-from flask import Flask ,render_template,url_for, request,redirect, Response, jsonify
+from flask import Flask ,session,render_template,url_for, request,redirect, Response, jsonify
 import handler
 import json
 import ast
@@ -9,12 +9,13 @@ from flask_cors import CORS,cross_origin
 from flask_socketio import SocketIO
 
 
+
 application = Flask(__name__)
 CORS(application)
 socketio = SocketIO(application=application, cors_allowed_origins='*')
 socketio=SocketIO(application)
-
-session_username = ""
+application.secret_key = "lij5t33jlfjslfs"
+session = {"auth_token":"","user":""}
 
 # @application.route('/')
 # def home():
@@ -24,22 +25,23 @@ session_username = ""
 profile_data = []
 
 # Pulls username
-@application.route('/login')
-def get_username():
+# @application.route('/login')
+# def get_username():
 
-    request_data = request.get_json()
-    print(request_data)
-    # session_username = 
-    return session_username
+#     request_data = request.get_json()
+#     print(request_data)
+#     # session_username = 
+#     return session_username
 
 # Displays dashboard by pulling data from GitHub API using session_username.
 @application.route('/dashboard', methods=["GET"])
 @cross_origin()
-def display_dashboard(auth_token):
+def display_dashboard():
     #list_of_repos = handler.get_repos()
-    user_info = handler.get_user_info(auth_token)
-    
-    return {"body":user_info,"status":200}
+    user_info = handler.get_user_info(session["auth_token"])
+    session["user"] = user_info[2]
+    user_repos = handler.get_repos(session["auth_token"],session["user"])
+    return {"user_info":user_info,"repos":user_repos,"status":200}
 
 
 @application.route('/getGithubToken')
@@ -51,7 +53,9 @@ def exchange_token():
     responsejson = json.loads(response.text)
     
     if("access_token" in responsejson):
-        display_dashboard(responsejson['access_token'])
+        
+        session["auth_token"] = responsejson['access_token']
+    
         return redirect('http://localhost:3000/dashboard',)
         
     else:
@@ -60,7 +64,9 @@ def exchange_token():
     #return responsejson
 
 # Deploys the customer's app
-
+@application.route('/repoWorkingStation')
+def displayRepoInfo():
+    return redirect('http://localhost:3000/repo-working-station')
 
 @application.route('/start_deployment')
 def deploy_app():

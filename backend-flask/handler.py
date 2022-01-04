@@ -31,23 +31,16 @@ def get_folder(url):
 
 # build_app('https://github.com/SrKoDes/DEPLOY4_FLASK_APP.git')
 
-def get_repos(url):
+def get_repos(auth_token,user):
     # Get the list of repos as well as the list of repo URL's
-    list_of_repos = []
-    list_of_urls = []
-    
+
     # Get API response
-    response = urlopen(url)
-    full_api_call = json.loads(response.read())
-
+    response = requests.get(f"https://api.github.com/users/{user}/repos",headers={'Authorization':f"token {auth_token}"})
+    full_api_call = json.loads(response.text)
+    
     # Pull relevant information
-    for repo in full_api_call:
-        list_of_repos.append(repo['name'])
-
-    for url in full_api_call:
-        list_of_urls.append(repo['clone_url'])
-
-    return list_of_repos, list_of_urls
+    print(full_api_call)
+    return full_api_call
 
 
 def get_user_info(auth_token):
