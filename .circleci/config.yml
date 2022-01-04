@@ -29,6 +29,7 @@ jobs:
       - run:
           name: terraform
           command: |
+            cd terraform
             terraform apply -auto-approve 
       - persist_to_workspace:
           root: .
@@ -44,7 +45,8 @@ jobs:
       - run:
           name: terraform create destroy plan
           command: |
-            terraform plan -destroy -var-file variables.tfvars
+            cd terraform
+            terraform plan -destroy 
       - persist_to_workspace:
           root: .
           paths:
@@ -59,6 +61,7 @@ jobs:
       - run:
           name: terraform destroy
           command: |
+            cd terraform
             terraform apply -auto-approve 
 
 workflows:
@@ -73,13 +76,13 @@ workflows:
       - apply:
           requires:
             - hold-apply
-      - plan-destroy:
-          requires:
-            - apply
-      - hold-destroy:
-          type: approval
-          requires:
-            - plan-destroy
-      - destroy:
-          requires:
-            - hold-destroy
+#       - plan-destroy:
+#           requires:
+#             - apply
+#       - hold-destroy:
+#           type: approval
+#           requires:
+#             - plan-destroy
+#       - destroy:
+#           requires:
+#             - hold-destroy
