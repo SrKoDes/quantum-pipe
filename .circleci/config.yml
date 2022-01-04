@@ -15,7 +15,7 @@ jobs:
             terraform plan -out tfapply 
       - persist_to_workspace:
           root: .
-          paths: /terraform
+          paths: terraform
             - .
 
   apply:
