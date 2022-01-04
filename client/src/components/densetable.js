@@ -27,7 +27,7 @@ export default function DenseTable(props) {
             >
               <TableCell component="th" scope="row" sx={{display:"flex",justifyContent:"space-between"}} >
                <Link href={item.html_url}>{item.name}</Link> 
-              <Fab variant="extended" size="small" color="primary"><Button color="inherit">Deploy</Button></Fab>
+              <Fab variant="extended" size="small" color="primary"><Button color="inherit">Add</Button></Fab>
               </TableCell>
               
             </TableRow>
