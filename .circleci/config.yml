@@ -14,7 +14,7 @@ jobs:
           command: |
             cd terraform
             terraform init -input=false
-            terraform plan -out tfapply 
+            terraform plan -out  
       - persist_to_workspace:
           root: .
           paths: 
@@ -44,7 +44,7 @@ jobs:
       - run:
           name: terraform create destroy plan
           command: |
-            terraform plan -destroy -out tfdestroy -var-file variables.tfvars
+            terraform plan -destroy -out -var-file variables.tfvars
       - persist_to_workspace:
           root: .
           paths:
@@ -59,7 +59,7 @@ jobs:
       - run:
           name: terraform destroy
           command: |
-            terraform apply -auto-approve tfdestroy
+            terraform apply -auto-approve 
 
 workflows:
   version: 2
