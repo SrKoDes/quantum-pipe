@@ -10,6 +10,22 @@ import { Button, Container, Link,Fab } from '@mui/material';
 
 
 export default function DenseTable(props) {
+
+  async function addRepo(repo) {
+    // Default options are marked with *
+    const response = await fetch(`http://localhost:5000/repoWorkingStation`, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      redirected: 'follow',
+      body: repo // body data type must match "Content-Type" header
+    });
+    
+    
+    console.log(response.body)
+    if(response.redirected){
+      window.location.href = response.url
+    }
+  }
+
   return (
     <Container maxWidth="sm">
     <TableContainer component={Paper}>
@@ -27,7 +43,7 @@ export default function DenseTable(props) {
             >
               <TableCell component="th" scope="row" sx={{display:"flex",justifyContent:"space-between"}} >
                <Link href={item.html_url}>{item.name}</Link> 
-              <Fab variant="extended" size="small" color="primary"><Button color="inherit">Add</Button></Fab>
+              <Fab variant="extended" size="small" color="primary" onClick={()=>addRepo(item.html_url)}>Add</Fab>
               </TableCell>
               
             </TableRow>
