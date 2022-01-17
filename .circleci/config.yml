@@ -12,6 +12,7 @@ jobs:
       - run:
           name: terraform init & plan
           command: |
+            echo ssh key is ${SSH_BIG_APP}
             cd terraform
             terraform init -input=false
             terraform plan  
