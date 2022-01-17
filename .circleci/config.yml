@@ -32,7 +32,7 @@ jobs:
           command: |
             cd terraform
             terraform apply -auto-approve 
-            ssh -i ../backend-flask/terraform/terraform-keys ubuntu@$(terraform output -raw instance_pub_ip) <<'ENDSSH'
+            ssh -it ../backend-flask/terraform/terraform-keys ubuntu@$(terraform output -raw instance_pub_ip) <<'ENDSSH'
               
               git clone https://github.com/Kura-Team-6/pipe-in-a-pipe.git
               cd pipe-in-a-pipe
