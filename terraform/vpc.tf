@@ -78,7 +78,9 @@ resource "aws_security_group" "react" {
 
 resource "aws_key_pair" "deployer" {
   key_name   = "app_key"
-  public_key = "MIIBigKCAYEAnaaVQPMvKq4EL9CJTmdnRtz03ucviFTaRE/y6OkYbWx6VnB8fdpT
+  public_key = "
+  -----BEGIN RSA PUBLIC KEY-----
+MIIBigKCAYEAnaaVQPMvKq4EL9CJTmdnRtz03ucviFTaRE/y6OkYbWx6VnB8fdpT
 xbWdomWNjjDBR9TV12HzkCmZxmW3NEnOMiJyKk34IhxaEVDp36H0hoeAZzrKRJlP
 EnKQGWwTdQevbHmMw29a1DWwKUF2CCMoq4+rjR3HyJoNVmYorINTIKLF1KVye+BP
 cKe2UaQygERnLcmakYqXYqaUDxSMhG/6RmSxIhkUZ2rfo2Qa3DtOfVLbuS5fKZK2
@@ -86,5 +88,7 @@ cKe2UaQygERnLcmakYqXYqaUDxSMhG/6RmSxIhkUZ2rfo2Qa3DtOfVLbuS5fKZK2
 tIm33+QsjpdakqGXyrkaavfNnNKW4HkRkF3wEMNEk0fn6UtU2OsWoDwS7SsfCiKz
 gxskmbVmKJEo8SDJh59upUSyE5CTQI0stKHHvkLQLWHMm2eu3BGz3jdZDSV1ThAl
 v1IG9YvHFsx2KJnOn21edJo5O9IFVyRVGh2XHh+Wyl1+2MGdpINQv6xt5jwbnQEy
-kb36yqTTRdXfAgMBAAE="
+kb36yqTTRdXfAgMBAAE=
+-----END RSA PUBLIC KEY-----
+  "
 }
