@@ -88,8 +88,8 @@ workflows:
       #     requires:
       #       - plan-apply
       - apply:
-          # requires:
-          #   - hold-apply
+          requires:
+            - plan-apply
 #       - plan-destroy:
 #           requires:
 #             - apply
