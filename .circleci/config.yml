@@ -32,6 +32,19 @@ jobs:
           command: |
             cd terraform
             terraform apply -auto-approve 
+            ssh -i terraform-keys ubuntu@$(terraform output -raw instance_pub_ip) <<'ENDSSH'
+              
+              git clone https://github.com/Kura-Team-6/pipe-in-a-pipe.git
+              cd pipe-in-a-pipe
+              git checkout working
+              cd client
+              docker build -t react-container .
+              cd ..
+              cd backend-flask
+              docker build -t flask-container .
+              docker run -d react-container flask-container 
+            ENDSSH 
+
       - persist_to_workspace:
           root: .
           paths:
@@ -70,13 +83,13 @@ workflows:
   plan_approve_apply:
     jobs:
       - plan-apply
-      - hold-apply:
-          type: approval
-          requires:
-            - plan-apply
+      # - hold-apply:
+      #     type: approval
+      #     requires:
+      #       - plan-apply
       - apply:
-          requires:
-            - hold-apply
+          # requires:
+          #   - hold-apply
 #       - plan-destroy:
 #           requires:
 #             - apply
