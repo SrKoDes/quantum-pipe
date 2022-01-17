@@ -4,7 +4,6 @@ import handler
 import json
 import ast
 import requests
-from getUserData import get_user_data
 from flask_cors import CORS,cross_origin 
 from flask_socketio import SocketIO
 
@@ -64,9 +63,9 @@ def exchange_token():
     #return responsejson
 
 # Deploys the customer's app
-@application.route('/repoWorkingStation')
+@application.route('/repoWorkingStation', methods=['POST'])
 def displayRepoInfo():
-    return redirect('http://localhost:3000/repo-working-station')
+    return redirect('http://localhost:3000/repo-work-station')
 
 @application.route('/start_deployment')
 def deploy_app():

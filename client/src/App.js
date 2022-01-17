@@ -5,6 +5,8 @@ import SignIn from './components/signIn';
 import { Route, Routes } from 'react-router-dom';
 import Dashboard from './pages/dashboard';
 import CollapsibleTable from './pages/repoWorkStation';
+import LogRocket from 'logrocket';
+LogRocket.init('app/id');
 
 function App() {
   return (
