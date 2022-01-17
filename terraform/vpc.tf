@@ -78,5 +78,5 @@ resource "aws_security_group" "react" {
 
 resource "aws_key_pair" "deployer" {
   key_name   = "app_key"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCdppVA8y8qrgQv0IlOZ2dG3PTe5y+IVNpET/Lo6RhtbHpWcHx92lPFtZ2iZY2OMMFH1NXXYfOQKZnGZbc0Sc4yInIqTfgiHFoRUOnfofSGh4BnOspEmU8ScpAZbBN1B69seYzDb1rUNbApQXYIIyirj6uNHcfImg1WZiisg1MgosXUpXJ74E9wp7ZRpDKARGctyZqRipdippQPFIyEb/pGZLEiGRRnat+jZBrcO059Utu5Ll8pkrbn+0Fkb/JWp2SBDQngpGKsuZwI9KXd29LGu43wVT5pIkjio6GM9aaNlkNbwKY1JNO0ibff5CyOl1qSoZfKuRpq982c0pbgeRGQXfAQw0STR+fpS1TY6xagPBLtKx8KIrODGySZtWYokSjxIMmHn26lRLITkJNAjSy0oce+QtAtYcybZ67cEbPeN1kNJXVOECW/Ugb1i8cWzHYomc6fbV50mjk70gVXJFUaHZceH5bKXX7YwZ2kg1C/rG3mPBudATKRvfrKpNNF1d8= hev@Kos-MacBook-Pro"
+  public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEErhL9BHn11zHJcr+4TduLJoCuxXCUulDBHXeuP0fME pipe-in-a-pipe"
 }
