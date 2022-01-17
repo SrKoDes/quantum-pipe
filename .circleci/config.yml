@@ -33,7 +33,7 @@ jobs:
             cd terraform
             terraform apply -auto-approve 
             chmod 400 pipe_ssh
-            ssh -i terraform-keys ubuntu@$(terraform output -raw instance_pub_ip) -o "StrictHostKeyChecking no" 'bash -s' <<'ENDSSH'
+            ssh -i pipe_ssh ubuntu@$(terraform output -raw instance_pub_ip) -o "StrictHostKeyChecking no" 'bash -s' <<'ENDSSH'
               
               git clone https://github.com/Kura-Team-6/pipe-in-a-pipe.git
               cd pipe-in-a-pipe
