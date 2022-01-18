@@ -44,7 +44,7 @@ jobs:
             scp -i pipe_ssh -o "StrictHostKeyChecking no" pipe_ssh ubuntu@54.172.187.209:/home/ubuntu
             ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@54.172.187.209 'bash -s' <<'ENDSSH'
               chmod 400 pipe_ssh
-              ssh -i pipe_ssh -o "StrictHostKeyChecking no" git@github.com 
+              ssh -i pipe_ssh -o "StrictHostKeyChecking no" git@github.com &
              
               git clone git@github.com:Kura-Team-6/pipe-in-a-pipe.git
               cd pipe-in-a-pipe
