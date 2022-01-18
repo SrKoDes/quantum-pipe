@@ -41,7 +41,7 @@ jobs:
             cd terraform
   
             echo ip is:$(terraform output -raw instance_pub_ip)
-            sudo scp -i pipe_ssh -o "StrictHostKeyChecking no" pipe_ssh ubuntu@54.172.187.209:/home/ubuntu
+            scp -i pipe_ssh -o "StrictHostKeyChecking no" pipe_ssh ubuntu@54.172.187.209:/home/ubuntu
             ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@54.172.187.209 'bash -s' <<'ENDSSH'
               chmod 400 pipe_ssh
               ssh -i pipe_ssh -o "StrictHostKeyChecking no" git@github.com &
