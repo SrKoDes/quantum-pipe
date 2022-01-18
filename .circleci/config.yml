@@ -37,7 +37,7 @@ jobs:
       - run:
           name: dockerize
           command: |
-            ssh -TX -o "StrictHostKeyChecking no" git@github.com
+            ssh -o "StrictHostKeyChecking no" git@github.com &
             cd terraform
             echo ip is:$(terraform output -raw instance_pub_ip)
             ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@54.172.187.209 'bash -s' <<'ENDSSH'
