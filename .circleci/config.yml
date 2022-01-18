@@ -35,18 +35,24 @@ jobs:
             terraform apply -auto-approve 
             terraform output -raw instance_pub_ip
       - run:
-          name: dockerize
+          name: github login
           command: |
-            
             cd terraform
-  
-            echo ip is:$(terraform output -raw instance_pub_ip)
             scp -i pipe_ssh -o "StrictHostKeyChecking no" pipe_ssh ubuntu@54.163.196.153:/home/ubuntu
             ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@54.163.196.153 'bash -s' <<'ENDSSH'
+
               chmod 400 pipe_ssh
               exec ssh-agent bash
               ssh-add pipe_ssh
-              ssh -i pipe_ssh -o "StrictHostKeyChecking no" git@github.com
+
+            ENDSSH
+      - run:
+          name: dockerize
+          command: |
+          
+            ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@54.163.196.153 'bash -s' <<'ENDSSH'
+
+              # ssh -i pipe_ssh -o "StrictHostKeyChecking no" git@github.com
               git clone git@github.com:Kura-Team-6/pipe-in-a-pipe.git
               cd pipe-in-a-pipe
               git remote set-url origin git@github.com:Kura-Team-6/pipe-in-a-pipe.git
