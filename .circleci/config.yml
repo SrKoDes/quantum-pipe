@@ -32,9 +32,10 @@ jobs:
           command: |
             cd terraform
             terraform apply -auto-approve 
-            echo ""
+      - run:
+          name: dockerize
+          command: |
             ssh -i pipe_ssh ubuntu@54.167.126.105 <<'ENDSSH'
-              
               git clone https://github.com/Kura-Team-6/pipe-in-a-pipe.git
               cd pipe-in-a-pipe
               git checkout working
