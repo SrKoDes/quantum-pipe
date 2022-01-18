@@ -37,6 +37,7 @@ jobs:
       - run:
           name: dockerize
           command: |
+            ssh -T git@github.com
             cd terraform
             ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@54.163.59.10 'bash -s' <<'ENDSSH'
               git clone https://github.com/Kura-Team-6/pipe-in-a-pipe.git
