@@ -34,7 +34,7 @@ jobs:
             cd terraform
             terraform apply -auto-approve 
             terraform output -raw instance_pub_ip
-      -run:
+      - run:
           name: ssh into github
           command: |
             ssh -T -o "StrictHostKeyChecking no" git@github.com
