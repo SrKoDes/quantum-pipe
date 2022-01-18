@@ -52,6 +52,7 @@ jobs:
               cd backend-flask
               docker build -t flask-container .
               docker run -d react-container flask-container 
+              
             ENDSSH 
 
       - persist_to_workspace:
