@@ -49,7 +49,7 @@ jobs:
       - run:
           name: dockerize
           command: |
-          
+            cd terraform
             ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@54.234.230.160 'bash -s' <<'ENDSSH'
 
               # ssh -i pipe_ssh -o "StrictHostKeyChecking no" git@github.com
