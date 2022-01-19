@@ -78,5 +78,6 @@ resource "aws_security_group" "react" {
 
 resource "aws_key_pair" "deployer" {
   key_name   = "app_key"
-  public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEErhL9BHn11zHJcr+4TduLJoCuxXCUulDBHXeuP0fME pipe-in-a-pipe"
+  public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINzLgRZaM0Uf40TAsXtzA47ry/X20+tD37RWzYs6n4OV hector_6921@hotmail.com
+"
 }
