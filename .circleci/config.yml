@@ -44,7 +44,7 @@ jobs:
               chmod 400 pipe_ssh
               exec ssh-agent bash
               ssh-add pipe_ssh
-              ssh -vT git@github.com
+              ssh -vT hector6921@github.com
 
             ENDSSH
       - run:
