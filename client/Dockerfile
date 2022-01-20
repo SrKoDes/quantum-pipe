@@ -5,5 +5,5 @@ COPY package-lock.json .
 RUN npm install
 RUN npm i --save logrocket
 COPY . .
-EXPOSE 3000
 CMD ["npm", "start"]
+EXPOSE 3000
