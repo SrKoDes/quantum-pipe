@@ -50,7 +50,7 @@ jobs:
               git checkout working-1-19
               docker build -t react-container client/.
               docker build -t flask-container backend-flask/.
-              docker run -d react-container 
+              docker run -d -p 3000:3000 react-container 
               docker run -d flask-container
             ENDSSH
 

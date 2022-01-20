@@ -6,4 +6,3 @@ RUN npm install
 RUN npm i --save logrocket
 COPY . .
 CMD ["npm", "start"]
-EXPOSE 3000
