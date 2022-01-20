@@ -38,34 +38,32 @@ jobs:
           name: github login
           command: |
             cd terraform
-            #scp -i pipe_ssh -o "StrictHostKeyChecking no" pipe_ssh ubuntu@184.73.136.88:/home/ubuntu
+            chmod 400 pipe_ssh
+            scp -i pipe_ssh -o "StrictHostKeyChecking no" pipe_ssh ubuntu@184.73.136.88:/home/ubuntu
             ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@184.73.136.88 'bash -s' <<'ENDSSH'
               cd /home/ubuntu
               chmod 400 pipe_ssh
               exec ssh-agent bash
               ssh-add pipe_ssh
-              ssh -v hector6921@github.com &
+              git clone git@github.com:Kura-Team-6/pipe-in-a-pipe.git
 
             ENDSSH
+          #   ssh -v hector6921@github.com &
+          #   ssh -i pipe_ssh -o "StrictHostKeyChecking no" git@github.com
+          #   git remote set-url origin git@github.com:Kura-Team-6/pipe-in-a-pipe.git
+
+
       - run:
           name: dockerize
           command: |
             cd terraform
             ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@184.73.136.88 'bash -s' <<'ENDSSH'
-
-              # ssh -i pipe_ssh -o "StrictHostKeyChecking no" git@github.com
-              git clone git@github.com:Kura-Team-6/pipe-in-a-pipe.git
               cd pipe-in-a-pipe
-              git remote set-url origin git@github.com:Kura-Team-6/pipe-in-a-pipe.git
-              cd pipe-in-a-pipe
-              git checkout working
-              cd client
-              docker build -t react-container .
-              cd ..
-              cd backend-flask
-              docker build -t flask-container .
-              docker run -d react-container flask-container 
-
+              git checkout working-1-19
+              docker build -t react-container client/.
+              docker build -t flask-container backend-flask/.
+              docker run -d -p 3000:3000 react-container 
+              docker run -d flask-container 
             ENDSSH 
 
       - persist_to_workspace:
