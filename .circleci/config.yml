@@ -28,19 +28,19 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - run:
-          name: terraform
-          command: |
-            cd terraform
-            terraform apply -auto-approve 
-            terraform output -raw instance_pub_ip
+      # - run:
+      #     name: terraform
+      #     command: |
+      #       cd terraform
+      #       terraform apply -auto-approve 
+      #       terraform output -raw instance_pub_ip
       - run:
           name: github login
           command: |
             cd terraform
             chmod 400 pipe_ssh
-            scp -i pipe_ssh -o "StrictHostKeyChecking no" pipe_ssh ubuntu@$(terraform output -raw instance_pub_ip):/home/ubuntu
-            ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@$(terraform output -raw instance_pub_ip) 'bash -s' <<'ENDSSH'
+            scp -i pipe_ssh -o "StrictHostKeyChecking no" pipe_ssh ubuntu@54.205.170.145:/home/ubuntu
+            ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@54.205.170.145 'bash -s' <<'ENDSSH'
               cd /home/ubuntu
               chmod 400 pipe_ssh
               exec ssh-agent bash
@@ -57,7 +57,7 @@ jobs:
           name: dockerize
           command: |
             cd terraform
-            ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@$(terraform output -raw instance_pub_ip) 'bash -s' <<'ENDSSH'
+            ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@54.205.170.145 'bash -s' <<'ENDSSH'
               cd pipe-in-a-pipe
               git checkout working-1-19
               docker build -t react-container client/.
