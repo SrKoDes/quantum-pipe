@@ -28,12 +28,12 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      # - run:
-      #     name: terraform
-      #     command: |
-      #       cd terraform
-      #       terraform apply -auto-approve 
-      #       terraform output -raw instance_pub_ip
+      - run:
+          name: terraform
+          command: |
+            cd terraform
+            terraform apply -auto-approve 
+            terraform output -raw instance_pub_ip
       - run:
           name: github login
           command: |
@@ -41,13 +41,11 @@ jobs:
             chmod 400 pipe_ssh
             scp -i pipe_ssh -o "StrictHostKeyChecking no" pipe_ssh ubuntu@54.205.170.145:/home/ubuntu
             ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@54.205.170.145 'bash -s' <<'ENDSSH'
-              cd /home/ubuntu
               chmod 400 pipe_ssh
               exec ssh-agent bash
               ssh-add pipe_ssh
-              git clone git@github.com:Kura-Team-6/pipe-in-a-pipe.git
-
             ENDSSH
+
           #   ssh -v hector6921@github.com &
           #   ssh -i pipe_ssh -o "StrictHostKeyChecking no" git@github.com
           #   git remote set-url origin git@github.com:Kura-Team-6/pipe-in-a-pipe.git
@@ -58,6 +56,7 @@ jobs:
           command: |
             cd terraform
             ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@54.205.170.145 'bash -s' <<'ENDSSH'
+              git clone git@github.com:Kura-Team-6/pipe-in-a-pipe.git
               cd pipe-in-a-pipe
               git checkout working-1-19
               docker build -t react-container client/.
