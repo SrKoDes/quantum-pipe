@@ -39,8 +39,8 @@ jobs:
           command: |
             cd terraform
             chmod 400 pipe_ssh
-            scp -i pipe_ssh -o "StrictHostKeyChecking no" pipe_ssh ubuntu@184.73.136.88:/home/ubuntu
-            ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@184.73.136.88 'bash -s' <<'ENDSSH'
+            scp -i pipe_ssh -o "StrictHostKeyChecking no" pipe_ssh ubuntu@$(terraform output -raw instance_pub_ip):/home/ubuntu
+            ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@$(terraform output -raw instance_pub_ip) 'bash -s' <<'ENDSSH'
               cd /home/ubuntu
               chmod 400 pipe_ssh
               exec ssh-agent bash
@@ -57,7 +57,7 @@ jobs:
           name: dockerize
           command: |
             cd terraform
-            ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@184.73.136.88 'bash -s' <<'ENDSSH'
+            ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@$(terraform output -raw instance_pub_ip) 'bash -s' <<'ENDSSH'
               cd pipe-in-a-pipe
               git checkout working-1-19
               docker build -t react-container client/.
