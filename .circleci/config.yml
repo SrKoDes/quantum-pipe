@@ -46,6 +46,12 @@ jobs:
               ssh-add pipe_ssh
               ssh-keyscan -H github.com >> ~/.ssh/known_hosts
               git clone git@github.com:Kura-Team-6/pipe-in-a-pipe.git
+              cd pipe-in-a-pipe
+              git checkout working-1-19
+              docker build -t react-container client/.
+              docker build -t flask-container backend-flask/.
+              docker run -d -p 3000:3000 react-container 
+              docker run -d flask-container
             ENDSSH
 
           #   ssh -v hector6921@github.com &
@@ -53,19 +59,18 @@ jobs:
           #   git remote set-url origin git@github.com:Kura-Team-6/pipe-in-a-pipe.git
 
 
-      - run:
-          name: dockerize
-          command: |
-            cd terraform
-            ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@184.72.68.239 'bash -s' <<'ENDSSH'
-              
-              cd pipe-in-a-pipe
-              git checkout working-1-19
-              docker build -t react-container client/.
-              docker build -t flask-container backend-flask/.
-              docker run -d -p 3000:3000 react-container 
-              docker run -d flask-container 
-            ENDSSH 
+      # - run:
+      #     name: dockerize
+      #     command: |
+      #       cd terraform
+      #       ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@184.72.68.239 'bash -s' <<'ENDSSH'
+      #         cd pipe-in-a-pipe
+      #         git checkout working-1-19
+      #         docker build -t react-container client/.
+      #         docker build -t flask-container backend-flask/.
+      #         docker run -d -p 3000:3000 react-container 
+      #         docker run -d flask-container 
+      #       ENDSSH 
 
       - persist_to_workspace:
           root: .
