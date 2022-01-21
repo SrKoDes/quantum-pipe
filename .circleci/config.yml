@@ -56,32 +56,6 @@ jobs:
               docker run -d -p 3000:3000 react-container 
               docker run -d -p 5000:5000 flask-container
             ENDSSH
-
-          #   ssh -v hector6921@github.com &
-          #   ssh -i pipe_ssh -o "StrictHostKeyChecking no" git@github.com
-          #   git remote set-url origin git@github.com:Kura-Team-6/pipe-in-a-pipe.git
-
-            ENDSSH
-      - run:
-          name: dockerize
-          command: |
-            cd terraform
-            ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@184.73.136.88 'bash -s' \<< 'ENDSSH'
-
-              # ssh -i pipe_ssh -o "StrictHostKeyChecking no" git@github.com
-              git clone git@github.com:Kura-Team-6/pipe-in-a-pipe.git
-              cd pipe-in-a-pipe
-              git remote set-url origin git@github.com:Kura-Team-6/pipe-in-a-pipe.git
-              cd pipe-in-a-pipe
-              git checkout working
-              cd client
-              docker build -t react-container .
-              cd ..
-              cd backend-flask
-              docker build -t flask-container .
-              docker run -d react-container flask-container 
-
-            ENDSSH 
  
       - persist_to_workspace:
           root: .
