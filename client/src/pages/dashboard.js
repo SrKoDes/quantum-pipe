@@ -41,7 +41,7 @@ function DashboardContent() {
     .then(text => setCurrentIp(text))
   
   }
-  useEffect(()=>{getIp()},[])
+  React.useLayoutEffect(()=>{getIp()},[])
 
   async function getUserData(){
     await fetch(`http://${currentIp}:5000/dashboard`)
