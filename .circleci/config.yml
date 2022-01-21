@@ -73,8 +73,9 @@ jobs:
       #         docker run -d -p 3000:3000 react-container 
       #         docker run -d flask-container 
       #       ENDSSH 
-      executor:
-        name: node/default
+      notify:
+        docker:
+          - image: 'cimg/base:stable'
         - slack/notify:
             channel: C02UZ005JN6
             event: fail
