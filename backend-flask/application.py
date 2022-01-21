@@ -74,8 +74,8 @@ def displayRepoInfo():
 @application.route('/start_deployment')
 def deploy_app():
     repo_url = request.args.get('repoUrl')
-    framework = request.args.get('framework')
-    user_app_ip = handler.build_app(repo_url, framework)
+   
+    user_app_ip = handler.build_app(repo_url)
     return user_app_ip
 
 if __name__ == '__main__':
