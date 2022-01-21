@@ -7,13 +7,22 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Button, Container, Link,Fab } from '@mui/material';
-
+import ipAddress from '../client_ip.txt'
 
 export default function DenseTable(props) {
+  const [currentIp, setCurrentIp] = React.useState('');
+
+  function getIp(){
+    fetch(ipAddress)
+    .then(response => response.text())
+    .then(text => setCurrentIp(text))
+  
+  }
+  React.useEffect(()=>{getIp()},[])
 
   async function addRepo(repo) {
     // Default options are marked with *
-    const response = await fetch(`http://localhost:5000/repoWorkingStation`, {
+    const response = await fetch(`http://${currentIp}:5000/repoWorkingStation`, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       redirected: 'follow',
       body: repo // body data type must match "Content-Type" header

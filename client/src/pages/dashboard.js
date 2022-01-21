@@ -6,6 +6,7 @@ import Link from '@mui/material/Link';
 import { Card, Container } from '@mui/material';
 import BasicCard from '../components/profileCard';
 import loadingLogo from '../images/pipelogogif.gif'
+import ipAddress from '../client_ip.txt'
 
 function Copyright(props) {
   return (
@@ -21,18 +22,29 @@ function Copyright(props) {
 }
 
 
+
 function DashboardContent() {
   const [open, setOpen] = React.useState(true);
   const [udata, setuData] = React.useState([]);
   const [isUdataReady, setUdataReady] = React.useState(false)
   // const [pdata, setpData] = React.useState([]);
   const [repoInfo, setRepoInfo] = React.useState([]);
+
+  const [currentIp, setCurrentIp] = React.useState('');
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
+  function getIp(){
+    fetch(ipAddress)
+    .then(response => response.text())
+    .then(text => setCurrentIp(text))
+  
+  }
+  useEffect(()=>{getIp()},[])
+
   async function getUserData(){
-    await fetch('http://localhost:5000/dashboard')
+    await fetch(`http://${currentIp}:5000/dashboard`)
     .then(res => res.json())
     // .then(data=>console.log(data.map(item=>item)))
     .then(data=>setuData(data))

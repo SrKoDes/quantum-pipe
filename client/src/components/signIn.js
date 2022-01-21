@@ -18,6 +18,7 @@ import GitHub from '@mui/icons-material/GitHub';
 import Logogif from '../images/pipelogogif.gif'
 import Logo from '../images/pipelogo.png'
 
+
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -34,6 +35,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -52,15 +54,15 @@ export default function SignIn() {
   //   .then(data => console.log(data));
   // }
   // useEffect(()=>{getToken()},[])
-  async function getUserProfileData(){
-    await fetch('https://api.github.com/repos/Kura-Team-6/pipe-in-a-pipe/actions/secrets/CLIENT_ID_OAUTH?scope=admin:org, repo')
-    .then(res => res.json()).then(res => console.log(res))
-    // .then(data=>console.log(data.map(item=>item)))
+//   async function getUserProfileData(){
+//     await fetch('https://api.github.com/repos/Kura-Team-6/pipe-in-a-pipe/actions/secrets/CLIENT_ID_OAUTH?scope=admin:org, repo')
+//     .then(res => res.json()).then(res => console.log(res))
+//     // .then(data=>console.log(data.map(item=>item)))
     
 
     
-  }
- useEffect(()=>{getUserProfileData()},[])
+//   }
+//  useEffect(()=>{getUserProfileData()},[])
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -84,24 +86,8 @@ export default function SignIn() {
             Please Enter your Github Account to get started.
           </Typography>
           <GitHub fontSize='large'/>
-          <TextField
-           id="email" 
-           label="Github Account"
-           variant="outlined"
-           margin="normal"
-           required
-           fullWidth
-           name="email"
-           autoComplete="email"
-           autoFocus 
 
-            />
-
-<FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Link href="https://github.com/login/oauth/authorize?client_id=0923bbef1520f84ac3e1&scope=repo,admin:org">
+            <Link href="https://github.com/login/oauth/authorize?client_id=0923bbef1520f84ac3e1&scope=repo">
             <Button
               fullWidth
               variant="contained"
@@ -112,11 +98,7 @@ export default function SignIn() {
             </Button>
             </Link>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
+
               <Grid item>
                 <Link href="#" variant="body2">
                   {"Don't have an account? Sign Up"}
