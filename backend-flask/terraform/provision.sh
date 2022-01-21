@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd terraform
 terraform init
 terraform apply --auto-approve
 chmod 400 user_app_key
