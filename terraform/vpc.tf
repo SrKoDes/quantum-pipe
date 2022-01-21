@@ -14,6 +14,7 @@ resource "aws_instance" "EC2-main" {
   }
 }
 
+
 resource "aws_instance" "EC2-terraform" {
   ami                    = "ami-01f096662a5ade245"
   instance_type          = "m5.large"
