@@ -41,7 +41,7 @@ function DashboardContent() {
     .then(text => setCurrentIp(text))
   
   }
-  React.useLayoutEffect(()=>{getIp()},[])
+  React.useLayoutEffect(()=>{getIp()},[currentIp])
 
   async function getUserData(){
     await fetch(`http://${currentIp}:5000/dashboard`)
@@ -54,7 +54,7 @@ function DashboardContent() {
     
   }
   
-React.useLayoutEffect(()=>{getUserData()},[])
+React.useLayoutEffect(()=>{getUserData()},[currentIp])
 console.log(udata.repos)
 // React.useEffect(()=>{getUserProfileData()},[])
 
