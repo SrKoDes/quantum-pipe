@@ -37,8 +37,8 @@ jobs:
           name: github login
           command: |
             cd terraform
-            terraform output -raw instance_pub_ip
-            terraform output -raw instance_pub_ip > client_ip.txt
+            terraform output -raw instance_priv_ip
+            terraform output -raw instance_priv_ip > client_ip.txt
             chmod 400 pipe_ssh
             scp -i pipe_ssh -o StrictHostKeyChecking=no pipe_ssh client_ip.txt ubuntu@$(cat client_ip.txt):/home/ubuntu
             ssh -i pipe_ssh -o StrictHostKeyChecking=no ubuntu@$(cat client_ip.txt) 'bash -s' \<< 'ENDSSH'
