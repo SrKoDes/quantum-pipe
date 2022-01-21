@@ -3,6 +3,8 @@ orbs:
   slack: circleci/slack@4.1
 jobs:
   name: bad job
+  - run:
+   eqf2 
     
   notify:
     docker:
