@@ -76,10 +76,10 @@ jobs:
           event: fail
           mentions: '@EngineeringTeam'
           template: basic_fail_1
-      - slack/notify:
-          channel: C02UZ005JN6
-          event: pass
-          template: success_tagged_deploy_1
+#       - slack/notify:
+#           channel: C02UZ005JN6
+#           event: pass
+#           template: success_tagged_deploy_1
       - persist_to_workspace:
           root: .
           paths:
