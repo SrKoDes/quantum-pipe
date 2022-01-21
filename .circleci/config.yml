@@ -2,9 +2,7 @@ version: '2.1'
 orbs:
   slack: circleci/slack@4.1
 jobs:
-  name: bad job
-    - run:
-        ssh -i efw.pem ubuntu@35.535.3.23
+  - run:
     
   notify:
     docker:
