@@ -2,6 +2,8 @@ version: '2.1'
 orbs:
   slack: circleci/slack@4.1
 jobs:
+  name: bad job
+    
   notify:
     docker:
       - image: 'cimg/base:stable'
