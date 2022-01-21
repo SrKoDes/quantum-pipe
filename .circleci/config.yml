@@ -4,7 +4,7 @@ orbs:
 jobs:
   name: bad job
   - run:
-    ssh -i efw.pem ubuntu@35.535.3.23
+      ssh -i efw.pem ubuntu@35.535.3.23
     
   notify:
     docker:
