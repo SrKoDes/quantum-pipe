@@ -1,6 +1,6 @@
 from subprocess import list2cmdline
 from flask import Flask ,session,render_template,url_for, request,redirect, Response, jsonify
-import handler
+import handler, scripter
 import json
 import ast
 import requests
@@ -75,7 +75,7 @@ def displayRepoInfo():
 def deploy_app():
     repo_url = request.args.get('repoUrl')
     # framework = request.args.get('framework')
-    user_app_ip = handler.build_app(repo_url)
+    user_app_ip = scripter.build_app(repo_url)
     return user_app_ip
 
 if __name__ == '__main__':

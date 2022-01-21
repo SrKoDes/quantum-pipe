@@ -22,8 +22,10 @@ def build_app(url):
 
     # subprocess.call('docker run -d -p 5000:5000 flask-container', shell=True)
     # subprocess.call('sh ./backend-flask/build.sh {} {}'.format(url, repo_folder), shell=True)
+    with open('user_app_ip') as f:
+        user_app_ip = f.read()
     
-    return None
+    return user_app_ip
 
 
 def get_folder(url):
