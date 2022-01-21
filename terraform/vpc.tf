@@ -3,7 +3,7 @@
 
 
 # CREATE EC2    
-resource "aws_instance" "EC2" {
+resource "aws_instance" "EC2-main" {
   ami                    = "ami-01f096662a5ade245"
   instance_type          = "m5.large"
   key_name               = "app_key"
@@ -14,7 +14,7 @@ resource "aws_instance" "EC2" {
   }
 }
 
-resource "aws_instance" "EC2" {
+resource "aws_instance" "EC2-terraform" {
   ami                    = "ami-01f096662a5ade245"
   instance_type          = "m5.large"
   key_name               = "app_key"
