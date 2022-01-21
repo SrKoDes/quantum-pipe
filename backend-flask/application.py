@@ -67,7 +67,9 @@ def exchange_token():
 # Deploys the customer's app
 @application.route('/repoWorkingStation', methods=['POST'])
 def displayRepoInfo():
-    return redirect(f'http://{client_ip}:3000/repo-work-station')
+    repoUrl = request.args.get('repoUrl')
+    repoName = request.args.get('repoName')
+    return redirect(f'http://{client_ip}:3000/repo-work-station?repoUrl=' + repoUrl + '&repoName='+repoName)
 
 @application.route('/start_deployment')
 def deploy_app():

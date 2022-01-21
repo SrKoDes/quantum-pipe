@@ -19,6 +19,7 @@ import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import StopCircleIcon from '@mui/icons-material/StopCircle';
 import buildInfo from '../build_progress.txt'
+import { useSearchParams } from 'react-router-dom'
 
 function createData(name, path, deploy) {
   return {
@@ -175,28 +176,16 @@ Row.propTypes = {
   }).isRequired
 };
 
-const rows = [
-  createData(
-    "pipe-in-a-pipe",
-    "https://github.com/Kura-Team-6/pipe-in-a-pipe",
-    
-   
-  ),
-  createData(
-    "pipe-in-a-pipe-v2",
-    "https://github.com/Kura-Team-6/pipe-in-a-pipe-v2",
-    
-
-  ),
-  createData(
-    "pipe-in-a-pipe-v3",
-    "https://github.com/Kura-Team-6/pipe-in-a-pipe-v3",
-    
-  
-  )
-];
-
 export default function CollapsibleTable() {
+
+  const [rows, setRows] = React.useState([])
+  const [searchParams, setSearchParams] = useSearchParams();
+  React.useEffect(()=>{
+    const repoURL = searchParams.get('repoUrl')
+    const repoName = searchParams.get('repoName')
+    setRows([createData(repoName, repoURL)])
+  }, [])
+
   return (
     <Container>
     <TableContainer component={Paper}>

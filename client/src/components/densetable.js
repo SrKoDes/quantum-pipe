@@ -20,12 +20,11 @@ export default function DenseTable(props) {
   }
   React.useEffect(()=>{getIp()},[])
 
-  async function addRepo(repo) {
+  async function addRepo(name, url) {
     // Default options are marked with *
-    const response = await fetch(`http://${currentIp}:5000/repoWorkingStation`, {
+    const response = await fetch(`http://${currentIp}:5000/repoWorkingStation?repoUrl=${url}&repoName=${name}`, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      redirected: 'follow',
-      body: repo // body data type must match "Content-Type" header
+      redirected: 'follow'
     });
     
     
@@ -52,7 +51,7 @@ export default function DenseTable(props) {
             >
               <TableCell component="th" scope="row" sx={{display:"flex",justifyContent:"space-between"}} >
                <Link href={item.html_url}>{item.name}</Link> 
-              <Fab variant="extended" size="small" color="primary" onClick={()=>addRepo(item.html_url)}>Add</Fab>
+              <Fab variant="extended" size="small" color="primary" onClick={()=>addRepo(item.name ,item.html_url)}>Add</Fab>
               </TableCell>
               
             </TableRow>
