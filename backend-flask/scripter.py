@@ -1,6 +1,5 @@
 import subprocess
 
-
 # subprocess.call("", shell=True)
 
 
@@ -34,7 +33,7 @@ def get_folder(url):
     return repo_folder
 
 
-build_app('https://github.com/SrKoDes/DEPLOY4_FLASK_APP.git', 'flask')
+# build_app('https://github.com/SrKoDes/DEPLOY4_FLASK_APP.git', 'flask')
 
 
 

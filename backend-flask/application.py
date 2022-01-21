@@ -7,14 +7,16 @@ import requests
 from flask_cors import CORS,cross_origin 
 from flask_socketio import SocketIO
 
-
-
 application = Flask(__name__)
 CORS(application)
 socketio = SocketIO(application=application, cors_allowed_origins='*')
 socketio=SocketIO(application)
 application.secret_key = "lij5t33jlfjslfs"
 session = {"auth_token":"","user":""}
+client_ip = ""
+
+with open('client_ip.txt') as f:
+    client_ip = f.read()
 
 # @application.route('/')
 # def home():
@@ -55,17 +57,17 @@ def exchange_token():
         
         session["auth_token"] = responsejson['access_token']
     
-        return redirect('http://localhost:3000/dashboard',)
+        return redirect(f'http://{client_ip}:3000/dashboard',)
         
     else:
         print("error")
-        return redirect('http://localhost:3000/')
+        return redirect(f'http://{client_ip}:3000/')
     #return responsejson
 
 # Deploys the customer's app
 @application.route('/repoWorkingStation', methods=['POST'])
 def displayRepoInfo():
-    return redirect('http://localhost:3000/repo-work-station')
+    return redirect(f'http://{client_ip}:3000/repo-work-station')
 
 @application.route('/start_deployment')
 def deploy_app():
