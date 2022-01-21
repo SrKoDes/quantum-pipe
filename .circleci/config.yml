@@ -1,6 +1,8 @@
 version: '2.1'
 orbs:
   slack: circleci/slack@4.1
+  node: 'circleci/node:4.1'
+
 jobs:
   
   
@@ -71,11 +73,13 @@ jobs:
       #         docker run -d -p 3000:3000 react-container 
       #         docker run -d flask-container 
       #       ENDSSH 
-      - slack/notify:
-          channel: C02UZ005JN6
-          event: fail
-          mentions: '@EngineeringTeam'
-          template: basic_fail_1
+      executor:
+        name: node/default
+        - slack/notify:
+            channel: C02UZ005JN6
+            event: fail
+            mentions: '@EngineeringTeam'
+            template: basic_fail_1
 #       - slack/notify:
 #           channel: C02UZ005JN6
 #           event: pass
