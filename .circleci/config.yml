@@ -40,7 +40,7 @@ jobs:
             terraform output -raw instance_pub_ip
             terraform output -raw instance_pub_ip > client_ip.txt
             chmod 400 pipe_ssh
-            scp -v -i pipe_ssh -o StrictHostKeyChecking=no pipe_ssh client_ip.txt ubuntu@$(cat client_ip.txt):/home/ubuntu
+            scp -i pipe_ssh -o StrictHostKeyChecking=no pipe_ssh client_ip.txt ubuntu@$(cat client_ip.txt):/home/ubuntu
             ssh -i pipe_ssh -o StrictHostKeyChecking=no ubuntu@$(cat client_ip.txt) 'bash -s' \<< 'ENDSSH'
               chmod 400 pipe_ssh
               exec ssh-agent bash
