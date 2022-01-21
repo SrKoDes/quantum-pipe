@@ -3,7 +3,7 @@ import subprocess
 # subprocess.call("", shell=True)
 
 
-def build_app(url, framework):
+def build_app(url):
     # Using the URL for the repo, run the build script on the repo's application
     repo_folder = get_folder(url)
 
@@ -33,7 +33,7 @@ def get_folder(url):
     return repo_folder
 
 
-build_app('https://github.com/SrKoDes/DEPLOY4_FLASK_APP.git', 'flask')
+build_app('https://github.com/SrKoDes/DEPLOY4_FLASK_APP.git')
 
 
 
