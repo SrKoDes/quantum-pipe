@@ -1,4 +1,5 @@
 #!/bin/bash
+#random change
 
 cd terraform
 terraform init
