@@ -4,7 +4,7 @@
 
 # CREATE EC2    
 resource "aws_instance" "EC2" {
-  ami                    = "ami-04505e74c0741db8d"
+  ami                    = "ami-01f096662a5ade245"
   instance_type          = "t2.micro"
   key_name               = "user_app_key"
   vpc_security_group_ids = [aws_security_group.ssh.id, aws_security_group.flask.id]
