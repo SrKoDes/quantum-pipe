@@ -1,8 +1,8 @@
-version: 2
-
-
-
+version: '2.1'
+orbs:
+  slack: circleci/slack@4.1
 jobs:
+  
   
   plan-apply:
     working_directory: ~/project
@@ -71,7 +71,15 @@ jobs:
       #         docker run -d -p 3000:3000 react-container 
       #         docker run -d flask-container 
       #       ENDSSH 
-
+      - slack/notify:
+          channel: C02UZ005JN6
+          event: fail
+          mentions: '@EngineeringTeam'
+          template: basic_fail_1
+      - slack/notify:
+          channel: C02UZ005JN6
+          event: pass
+          template: success_tagged_deploy_1
       - persist_to_workspace:
           root: .
           paths:
@@ -127,3 +135,5 @@ workflows:
 #       - destroy:
 #           requires:
 #             - hold-destroy
+   
+
