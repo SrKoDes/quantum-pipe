@@ -40,7 +40,7 @@ jobs:
             cd terraform
             chmod 400 pipe_ssh
             scp -i pipe_ssh -o "StrictHostKeyChecking no" pipe_ssh ubuntu@184.72.68.239:/home/ubuntu
-            ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@184.72.68.239 'bash -s' << 'ENDSSH'
+            ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@184.72.68.239 'bash -s' \<< 'ENDSSH'
               chmod 400 pipe_ssh
               exec ssh-agent bash
               ssh-add pipe_ssh
