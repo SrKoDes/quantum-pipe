@@ -123,8 +123,6 @@ workflows:
           requires:
             - plan-apply
       - notify:
-          requires:
-            - apply
           context: slack
 #       - plan-destroy:
 #           requires:
