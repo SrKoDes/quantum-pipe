@@ -49,7 +49,7 @@ jobs:
               git clone git@github.com:Kura-Team-6/pipe-in-a-pipe.git
               cd pipe-in-a-pipe
               git checkout working-1-19
-              cp ../client_ip.txt client
+              cp ../client_ip.txt client/src
               cp ../client_ip.txt backend-flask
               docker build -t react-container client/.
               docker build -t flask-container backend-flask/.
