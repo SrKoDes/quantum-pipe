@@ -73,14 +73,15 @@ jobs:
       #         docker run -d -p 3000:3000 react-container 
       #         docker run -d flask-container 
       #       ENDSSH 
-      notify:
-        docker:
-          - image: 'cimg/base:stable'
-        - slack/notify:
-            channel: C02UZ005JN6
-            event: fail
-            mentions: '@EngineeringTeam'
-            template: basic_fail_1
+  notify:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - slack/notify:
+          channel: C02UZ005JN6
+          event: fail
+          mentions: '@EngineeringTeam'
+          template: basic_fail_1
 #       - slack/notify:
 #           channel: C02UZ005JN6
 #           event: pass
