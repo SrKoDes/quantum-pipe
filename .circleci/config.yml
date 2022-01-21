@@ -47,7 +47,7 @@ jobs:
               ssh-keyscan -H github.com >> ~/.ssh/known_hosts
               git clone git@github.com:Kura-Team-6/pipe-in-a-pipe.git
               cd pipe-in-a-pipe
-              git checkout working2copy
+              git checkout feature/add-button-flow
               cp ../client_ip.txt client/src
               cp ../client_ip.txt backend-flask
               cd client
