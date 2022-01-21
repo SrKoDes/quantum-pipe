@@ -1,9 +1,8 @@
-version: 2
-
-
-
+version: '2.1'
+orbs:
+  slack: circleci/slack@4.1
 jobs:
-  
+ 
   plan-apply:
     working_directory: ~/project
     docker:
@@ -33,45 +32,45 @@ jobs:
           command: |
             cd terraform
             terraform apply -auto-approve 
-            terraform output -raw instance_pub_ip
+            
       - run:
           name: github login
           command: |
             cd terraform
-            #scp -i pipe_ssh -o "StrictHostKeyChecking no" pipe_ssh ubuntu@184.73.136.88:/home/ubuntu
-            ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@184.73.136.88 'bash -s' <<'ENDSSH'
-              cd /home/ubuntu
+            terraform output -raw instance_pub_ip
+            terraform output -raw instance_pub_ip > client_ip.txt
+            chmod 400 pipe_ssh
+            scp -i pipe_ssh -o StrictHostKeyChecking=no pipe_ssh client_ip.txt ubuntu@$(cat client_ip.txt):/home/ubuntu
+            ssh -i pipe_ssh -o StrictHostKeyChecking=no ubuntu@$(cat client_ip.txt) 'bash -s' \<< 'ENDSSH'
               chmod 400 pipe_ssh
               exec ssh-agent bash
               ssh-add pipe_ssh
-              ssh -v hector6921@github.com &
-
-            ENDSSH
-      - run:
-          name: dockerize
-          command: |
-            cd terraform
-            ssh -i pipe_ssh -o "StrictHostKeyChecking no" ubuntu@184.73.136.88 'bash -s' <<'ENDSSH'
-
-              # ssh -i pipe_ssh -o "StrictHostKeyChecking no" git@github.com
+              ssh-keyscan -H github.com >> ~/.ssh/known_hosts
               git clone git@github.com:Kura-Team-6/pipe-in-a-pipe.git
               cd pipe-in-a-pipe
-              git remote set-url origin git@github.com:Kura-Team-6/pipe-in-a-pipe.git
-              cd pipe-in-a-pipe
-              git checkout working
-              cd client
-              docker build -t react-container .
-              cd ..
-              cd backend-flask
-              docker build -t flask-container .
-              docker run -d react-container flask-container 
-
-            ENDSSH 
-
+              git checkout working-1-19
+              cp ../client_ip.txt client/src
+              cp ../client_ip.txt backend-flask
+              docker build -t react-container client/.
+              docker build -t flask-container backend-flask/.
+              docker run -d -p 3000:3000 react-container 
+              docker run -d -p 5000:5000 flask-container
+            ENDSSH
+ 
       - persist_to_workspace:
           root: .
           paths:
             - .
+  notify:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - slack/notify:
+         event: fail
+         template: basic_fail_1
+      - slack/notify:
+         event: pass
+         template: success_tagged_deploy_1
 
   plan-destroy:
     docker:
@@ -113,6 +112,8 @@ workflows:
       - apply:
           requires:
             - plan-apply
+      - notify:
+          context: slack
 #       - plan-destroy:
 #           requires:
 #             - apply
@@ -123,3 +124,5 @@ workflows:
 #       - destroy:
 #           requires:
 #             - hold-destroy
+
+

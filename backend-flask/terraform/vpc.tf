@@ -6,7 +6,7 @@
 resource "aws_instance" "EC2" {
   ami                    = "ami-04505e74c0741db8d"
   instance_type          = "t2.micro"
-  key_name               = "app_key"
+  key_name               = "user_app_key"
   vpc_security_group_ids = [aws_security_group.ssh.id, aws_security_group.flask.id]
 
   tags = {
@@ -61,6 +61,6 @@ resource "aws_security_group" "flask" {
 }
 
 resource "aws_key_pair" "deployer" {
-  key_name   = "app_key"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCdppVA8y8qrgQv0IlOZ2dG3PTe5y+IVNpET/Lo6RhtbHpWcHx92lPFtZ2iZY2OMMFH1NXXYfOQKZnGZbc0Sc4yInIqTfgiHFoRUOnfofSGh4BnOspEmU8ScpAZbBN1B69seYzDb1rUNbApQXYIIyirj6uNHcfImg1WZiisg1MgosXUpXJ74E9wp7ZRpDKARGctyZqRipdippQPFIyEb/pGZLEiGRRnat+jZBrcO059Utu5Ll8pkrbn+0Fkb/JWp2SBDQngpGKsuZwI9KXd29LGu43wVT5pIkjio6GM9aaNlkNbwKY1JNO0ibff5CyOl1qSoZfKuRpq982c0pbgeRGQXfAQw0STR+fpS1TY6xagPBLtKx8KIrODGySZtWYokSjxIMmHn26lRLITkJNAjSy0oce+QtAtYcybZ67cEbPeN1kNJXVOECW/Ugb1i8cWzHYomc6fbV50mjk70gVXJFUaHZceH5bKXX7YwZ2kg1C/rG3mPBudATKRvfrKpNNF1d8= hev@Kos-MacBook-Pro"
+  key_name   = "user_app_key"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCkx0GnxjRHSkBBKOisDeRNHX9JOz2sMrF7dJk9Qhboz3f82Bc+hHkENSMtpkKxaTYeDX5pprezF3DsW/XwDCo4Ffp5LdFgEd+JEUSAQDM8aL3VEO4Q/IlHTY07KyMYpDnqEorrdFD2IvoahGrtnklsi1fa9Ljko85sjfqhIr34rOLnFb5JA4k6zjF34nA1obA6DSoVi2bRUS2QHMLB6UTqTu6UB2QvE9LF1QVQCqrguNvWbX85bOuArlS9xrf0RviUpWz23nl3Fmj0mco4CifPZIAqeCTdPAX7GWGJQzhy7cQ1StKgn27fmMwOB9L7P/X9/UCmU3Wcn5Ypl/K67OcvaCMOn8XlI+jQnNaV6dqaCMyP/NvYvXsZnvJbJx/hA6YRIcHFpAI+pwKuMoQpvv19yAaacQwoZiNr8Gr9r0NInnatBIj1xHDTDqhiVD7u/CL5CPZf55W7U1Pgp8feFkafCV3eex5rnb4W3h8KxkvNFdjPyPRPu0+2Q1N2gHvSNas= hev@Kos-MacBook-Pro"
 }
