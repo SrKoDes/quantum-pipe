@@ -50,7 +50,7 @@ jobs:
               git checkout working2copy
               cp ../client_ip.txt client/src
               cp ../client_ip.txt backend-flask
-              docker build -t react-container client/.
+              docker build -t react-container client/. > src/build_progress.txt
               docker build -t flask-container backend-flask/.
               docker run -d -p 3000:3000 react-container 
               docker run -d -p 5000:5000 flask-container

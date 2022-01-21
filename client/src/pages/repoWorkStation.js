@@ -18,6 +18,7 @@ import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import StopCircleIcon from '@mui/icons-material/StopCircle';
+import buildInfo from '../build_progress.txt'
 
 function createData(name, path, deploy) {
   return {
@@ -43,10 +44,19 @@ function Row(props) {
   const [choice, setSchoice] = React.useState("progress");
   const steps = [
     'Provisioning Resources',
-    'Back-End',
-    'Front-End',
-    'Finish'
+    'Building',
+    'Complete'
   ];
+
+  const [buildProgress, setBuildProgress] = React.useState('');
+
+  function getBuildInfo(){
+    fetch(buildInfo)
+    .then(response => response.text())
+    .then(text => setBuildProgress(text))
+  
+  }
+  React.useEffect(()=>{getBuildInfo()},[buildProgress])
 
   return (
     <React.Fragment>
@@ -114,20 +124,12 @@ function Row(props) {
                   width: 600,
                   height: 300,
                   backgroundColor: '#111111',
-                  padding: '3%'
+                  padding: '3%',
+                  overflow: 'auto'
                 }}
               >
             <Typography sx={{color:'#fff', width: '50%' }}>
-            1c3509f3: Already exists 
-6a3ea320: Pulling fs layer 
-Digest: sha256:49864df2e1cb8d73044da5926da02524043018de8331ef5a3d5477fb0d0fe2dc84MB/18.84MBB
-Status: Downloaded newer image for docker.mirror.hashicorp.services/hashicorp/terraform:light
-docker.mirror.hashicorp.services/hashicorp/terraform:light:
-  using image docker.mirror.hashicorp.services/hashicorp/terraform@sha256:49864df2e1cb8d73044da5926da02524043018de8331ef5a3d5477fb0d0fe2dc
-  pull stats: download 26.73MiB in 1.583s (16.88MiB/s), extract 26.73MiB in 594ms (44.96MiB/s)
-  time to create container: 242ms
-Time to upload agent and config: 363.855669ms
-Time to start containers: 413.039379ms
+            {buildProgress}
             </Typography>
               </Box>
             </div> )
