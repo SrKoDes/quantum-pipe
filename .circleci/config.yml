@@ -47,6 +47,8 @@ jobs:
               ssh-add pipe_ssh
               ssh-keyscan -H github.com >> ~/.ssh/known_hosts
               git clone git@github.com:Kura-Team-6/pipe-in-a-pipe.git
+              cp client_ip.txt pipe-in-a-pipe/client/client_ip.txt
+              cp client_ip.txt pipe-in-a-pipe/backend-flask/client_ip.txt
               cd pipe-in-a-pipe
               git checkout working-1-19
               docker build -t react-container client/.
