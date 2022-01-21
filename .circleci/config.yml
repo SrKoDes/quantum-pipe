@@ -3,8 +3,8 @@ orbs:
   slack: circleci/slack@4.1
 jobs:
   name: bad job
-  - run:
-      ssh -i efw.pem ubuntu@35.535.3.23
+    - run:
+        ssh -i efw.pem ubuntu@35.535.3.23
     
   notify:
     docker:
