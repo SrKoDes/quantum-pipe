@@ -65,7 +65,7 @@ function Row(props) {
     
     const repoUrl = searchParams.get('repoUrl')
     // Default options are marked with *
-    const response = await fetch(`http://${currentIp}:5000/repoWorkingStation?repoUrl=${repoUrl}`, {
+    const response = await fetch(`http://${currentIp}:5000/start_deployment?repoUrl=${repoUrl}`, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       redirected: 'follow'
 
