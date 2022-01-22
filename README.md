@@ -1,76 +1,68 @@
+# Pipe in A Pipe
 
-<h1 align=center>Final Project</h1>
+### Use
 
-Introducing the Final Project! This project will be a culmination of all of your efforts throughout Kura and combine many of the DevOps techonologies you have learned throughout the last few months.
+Pipe in A Pipe is an application that enables developers to rapidly deploy their applications. Using application code hosted in Github, Pipe in A Pipe will provision and configure infrastructure to host the application.
 
-## High Level Requirements
+### Requirements
 
-1. **Application** - Flask app is recommended (Python), can also choose NodeJS
-2. **Containerization** - some element of using containers whether Docker or k8s
-3. **Infrastructure as Code (IaC)** - with Terraform or CloudFormation
-4. **CI/CD Pipeline** - Jenkins, CircleCI, GitHub Actions, GitLab, CodePipeline etc.
-5. **Monitoring & Alerting** - Cloudwatch logging for the service, trigger some actionable message to email, Slack channel, SMS etc. → using a Cloudwatch alarm 
-6. **Documentation** - Project Overview, choice of technology, how to operate the system
-7. **Systems Design** - Clean drawn network architecture diagram using draw.io or Lucidchart
+Pipe in A Pipe can currently serve **Flask** applications. The Flask configuration file must be named `application.py` and be placed in the root directory.
 
-Your project *must* contain all of the 7 components above but the specific technologies you use and how you use them is up to your team to decide. The guidelines above are meant as possible technology choices but not meant to be an exhaustive list. Discuss with your team what you would want to include from each category and start building!
+### End User Guide
 
-### Part 1: Agree on a Project & Plan it Out
+The User will log into the Pipe in A Pipe website with their Github account. They will be redirected to a page listing all of their Github repos. They can select the repository hosting the application they would like to deploy. The requirements listed in the previous section must be adhered to, otherwise Pipe in A Pipe will be unable to complete the deployment. Once the deployment of the application is complete, a URL will be given to the User to view their application. The User is also able to view previous deployments of applications.
 
-Pitch us on potential ideas for an end-to-end DevOps project. Think of topics you’re passionate about, knowledge you’re familiar with, or problems relevant to to industries you’d like to work with.
+### System Guide
 
-- **Requirements:** Come up with a few project ideas, including a specific app, potential technologies for each category, as well as some sample code. Remember, if you can’t find an app, you can’t start on your project.
-- **Deliverable:** Choose a specific app to work on and submit a rough draft of systems design brainstorming (could be drawn out on paper at this stage)
+Pipe in A Pipe is comprised of a `React` frontend and `Flask` backend and utilizes `Terraform` and `Docker` for not only the infrastructure of the served application, but also Pipe in A Pipe.
 
-### Part 2: Deploy the App & Start Iterating
+#### FRONTEND
+To initiate React:
+```
+npx run start 
+```
+The frontend is responisble for allowing the user to connect their github account with our app.  It then proceeds to show the user their repos and give them the opportunity to select the repo they would wand to deploy
 
-Use your newfound skills to kickstart your project by deploying the app in one of the ways we learned in class. At this stage, it could be using a basic deployment method – just focus on getting it out there for the world to see.
+#### BACKEND
+To initiate Flask:
+```
+cd backend-flask
+pip3 install requirements.txt
+FLASK_APP=application.py flask run
+```
+The backend is responsible for the deployment of the User's application. There are three `.py` files in the `backend-flask` directory. `application.py` is the Flask configuration file. `handler.py` runs the data processing required by the front end. `scripter.py` contains the function `build_app()` which is responsible for deploying the User's application. 
 
-Create a shared repo for the team. Ensure all members have access to push changes to the repo. How does a deployment work? What does the flow look like? What tools are involved? Finally, deploy the app. It doesn't have to be fancy yet... that will come later.
+The function takes in two arguments, the URL to the github repository hosting the application code, and the name of the framework of the application. The function begins by parsing the repository name from the URL. For example, if the URL is `https://github.com/example-user/example-app.git`, `example-app` will be saved as a variable `repo_name`.
 
-- **Requirements:** App is deployed, rough draft of physical design is due
-- **Deliverable:** App is demoable, a more detailed overview of how various technologies will work together (physical design) is due
+From there, the function calls a shell script, `provision.sh`. This script will initiate an EC2 instance using the `terraform` directory. The Dockerfile to containerize the User's application is then copied over to the EC2 instance and then the script, `build.sh` is run on the EC2 instance.
 
+`build.sh` will clone the repository with the User's application code and take the steps necessary to dockerize the application and serve the container.
 
-### Part 3: Create a Pipeline
+**TERRAFORM**
 
-Now that you have your app deployed and have an idea of how the various technologies can work together, let's add a CI/CD pipeline to automate the process of build, test, deploy. Use your favorite CI/CD tool (examples above) to integrate your processes into a single system.
+We have two sets of Terraform files. We have terraform files that will provision and configure Pipe in A Pipe as well as the User's application. Currently, the Terraform configuration files will only build an EC2 instance for both infrastructures. The plan in the future is to develop a VPC to host the entire of Pipe in A Pipe as well as the User's application.
 
-- **Requirements:** CI/CD pipeline is created using a tool of your choice and a draft of the pipeline design is due. The objective is that the previous deployment is now automated based on a certain trigger, for example pushes to a GitHub repo trigger a build, test, deploy
-- **Deliverable:** Code for a basic CI/CD pipeline is available and the CI/CD process is demoable
+**DOCKER**
 
+Our Dockerfiles are currently only used to containerize the User's application, with compatability with Flask and React applications. Our Dockerfiles get copied over to the EC2 that will host the User's application and are executed using the `build.sh` script.
 
-### Part 4: Let's Make it Fancy: Containers & IaC
+**MONITORING**
 
-Now that we have a basic pipeline going, let's take some time to add some bells and whistles. If the app is not Dockerized already, this is the time to build a Dockerfile and add it to the pipeline. Figure out what pieces of infrastructure you can rewrite as IaC. Create a runbook or describe the process for running the IaC.
+Our file is monitored with AWS cloudwatch.  A cloudwatch alarm was made that monitored the CPU usage.  It's connected with an SNS topic named CPU that the team subscribed to.  Once the CPU usage passes the threshold capacity we set an email alert should be sent.  We also plan using LogRocket for monitoring the frontend as well.
 
-- **Requirements:** App is containerized and is added into the pipeline, Infrastructure as Code is written to replace some of the existing infrastructure that was deployed manually
-- **Deliverable:** Code for containerizing the app is available (Dockerfile), Infrastructure as Code is added (Terraform or CloudFormation)
+**TECHNOLOGIES USED**
+- React js
+- Material-UI
+- Flask
+- Python
+- Terraform
+- AWS
+- Docker
+- CircleCI
 
-### Part 5: Define Operational Procedures, Monitoring & Alerting
+### Contributors
 
-Let's take a look back on your project and document processes that are crucial to its operation. If you were a new team member that needed to operate the system, what would you need to know? Create a runbook for common commands and how to run the stack as if you knew nothing.
-
-If an error is introduced into the system, how would an engineer know? Is there alerting on errors? How can you identify the bug and address it? Create a monitoring and alerting system and manually inject an error into the stack. Trace back the error and explain how it would an engineer would be alerted and solve the root cause of the issue.
-
-- **Requirements:** Create documentation for operating the system, add meaningful logging messages, create a system for monitoring and alerting
-- **Deliverable:** "Runbook" documentation available, demo of monitoring and alerting system
-
-### Part 6: Present Your Project
-
-With your team, create a 30 minute presentation, based on a slide deck, that showcases the most important aspects of your project. Start at a high level and give an overview the system. Discuss why you chose each piece of technology. Then dive in and show a demo of the system in operation. Explain the steps of the CI/CD pipeline and show how the app is deployed. Show what happens if an error occurs. Give an overview of the infrastructure. Explain your thought process and how the project evolved.
-
-- **Requirements:** Convey your goals, limits/assumptions, methods and their justification, findings, and conclusions. Define technical terms. Include graphics and visualizations.
-- **Deliverable:** Slide deck containing presentation as well as a demo showcasing the highlights of the stack in operation
-
-
-## Approximate Due Dates
-
-Assignment | Date 
-------- | --------- |
-Part 1 | 12/15
-Part 2 | 12/21
-Part 3 | 12/30
-Part 4 | 1/6
-Part 5 | 1/13
-Part 6 | TBD
+- Hector Rodriguez
+- Ian Mitchell
+- Jodi Pierre-Louis
+- Kohiin Desravines

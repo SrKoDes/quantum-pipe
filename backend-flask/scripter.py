@@ -6,22 +6,9 @@ import subprocess
 def build_app(url):
     # Using the URL for the repo, run the build script on the repo's application
     repo_folder = get_folder(url)
-
+    
     subprocess.call("sh ./terraform/provision.sh {} {}".format(url, repo_folder), shell=True)
 
-    # subprocess.call(f'git clone {url}', shell=True)
-    
-    # if framework == 'flask':
-    #     subprocess.call(f'docker build --build-arg FOLDER={repo_folder} -t "flask-container" .', shell=True)
-
-    # elif framework == 'react':
-    #     subprocess.call('docker build -t "react-container" ./react/DockerfileReact', shell=True)
-
-    # else:
-    #     return None
-
-    # subprocess.call('docker run -d -p 5000:5000 flask-container', shell=True)
-    # subprocess.call('sh ./backend-flask/build.sh {} {}'.format(url, repo_folder), shell=True)
     with open('user_app_ip') as f:
         user_app_ip = f.read()
     
