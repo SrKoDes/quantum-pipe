@@ -4,24 +4,6 @@ from urllib.request import urlopen
 from operator import itemgetter
 import requests
 
-def build_app(url, framework):
-    # Using the URL for the repo, run the build script on the repo's application
-    repo_folder = get_folder(url)
-    subprocess.call(f'git clone {url}', shell=True)
-
-    if framework == 'flask':
-        subprocess.call('docker build -t "flask-container" ./flask/DockerfileFlask',shell=True)
-
-    elif framework == 'react':
-        subprocess.call('docker build -t "react-container" ./react/DockerfileReact')
-
-    else:
-        return None
-
-    subprocess.call('sh ./backend-flask/build.sh {} {}'.format(url, repo_folder), shell=True)
-    
-    return None
-
 
 def get_folder(url):
     # Using the URL for the repo, get the folder name of the application
@@ -60,3 +42,22 @@ def get_user_info(auth_token):
 # print(get_repos('https://api.github.com/users/hector6921/repos'))
 
 # print(get_user_info('https://api.github.com/users/hector6921'))
+
+
+# def build_app(url, framework):
+#     # Using the URL for the repo, run the build script on the repo's application
+#     repo_folder = get_folder(url)
+#     subprocess.call(f'git clone {url}', shell=True)
+
+#     if framework == 'flask':
+#         subprocess.call('docker build -t "flask-container" ./flask/DockerfileFlask',shell=True)
+
+#     elif framework == 'react':
+#         subprocess.call('docker build -t "react-container" ./react/DockerfileReact')
+
+#     else:
+#         return None
+
+#     subprocess.call('sh ./backend-flask/build.sh {} {}'.format(url, repo_folder), shell=True)
+    
+#     return None

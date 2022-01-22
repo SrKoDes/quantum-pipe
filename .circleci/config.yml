@@ -58,12 +58,15 @@ jobs:
 
               cd client
               docker build -t react-container . > src/build_progress.txt
-              cd ../backend-flask
-              docker build -t flask-container .
               docker run -d -p 3000:3000 react-container 
-              docker run -d -p 5000:5000 flask-container
+              
             ENDSSH
- 
+            
+          # cd ../backend-flask  
+          # docker build -t flask-container .
+          # docker run -d -p 5000:5000 flask-container
+          #
+
       - persist_to_workspace:
           root: .
           paths:
