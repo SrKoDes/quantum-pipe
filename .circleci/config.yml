@@ -52,13 +52,10 @@ jobs:
               cp ../client_ip.txt client/src
               cp ../tf_ec2_ip.txt client/src
               cp ../client_ip.txt backend-flask
-              scp -r -i ../pipe_ssh -o StrictHostKeyChecking=no backend-flask/ ubuntu@$(cat ../tf_ec2_ip.txt):/home/ubuntu
-              ssh -i pipe_ssh -o StrictHostKeyChecking=no ubuntu@$(cat ../tf_ec2_ip.txt) 'bash -s' \<< 'ENDSSH'
-                cd backend-flask
-                docker build -t flask-container .
-                docker run -d -p 5000:5000 flask-container
-              ENDSSH
               
+              scp -r -i ../pipe_ssh -o StrictHostKeyChecking=no backend-flask/ ubuntu@$(cat ../tf_ec2_ip.txt):/home/ubuntu
+              ssh -i pipe_ssh -o StrictHostKeyChecking=no ubuntu@$(cat ../tf_ec2_ip.txt) 'bash -s' < ssh_into_tf.sh
+
               cd client
               docker build -t react-container . > src/build_progress.txt
               cd ../backend-flask
