@@ -7,7 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Button, Container, Link,Fab } from '@mui/material';
-import ipAddress from '../client_ip.txt'
+import ipAddress from '../tf_ec2_ip.txt'
 
 export default function DenseTable(props) {
   const [currentIp, setCurrentIp] = React.useState('');
