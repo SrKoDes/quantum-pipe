@@ -18,7 +18,7 @@ export default function DenseTable(props) {
     .then(text => setCurrentIp(text))
   
   }
-  React.useEffect(()=>{getIp()},[])
+  React.useEffect(()=>{getIp()},[currentIp])
 
   async function addRepo(name, url) {
     // Default options are marked with *

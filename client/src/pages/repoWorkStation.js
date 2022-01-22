@@ -20,6 +20,7 @@ import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import StopCircleIcon from '@mui/icons-material/StopCircle';
 import buildInfo from '../build_progress.txt'
 import { useSearchParams } from 'react-router-dom'
+import ipAddress from '../tf_ec2_ip.txt'
 
 function createData(name, path, deploy) {
   return {
@@ -49,17 +50,18 @@ function Row(props) {
     'Complete'
   ];
 
-  const [buildProgress, setBuildProgress] = React.useState('');
+  const [currentIp, setCurrentIp] = React.useState('');
 
-  function getBuildInfo(){
-    fetch(buildInfo)
+  function getIp(){
+    fetch(ipAddress)
     .then(response => response.text())
-    .then(text => setBuildProgress(text))
+    .then(text => setCurrentIp(text))
   
   }
-  React.useEffect(()=>{getBuildInfo()},[buildProgress])
+  React.useEffect(()=>{getIp()},[currentIp])
 
   async function buildRepo() {
+    const [searchParams, setSearchParams] = useSearchParams();
     const repoUrl = searchParams.get('repoUrl')
     // Default options are marked with *
     const response = await fetch(`http://${currentIp}:5000/repoWorkingStation?repoUrl=${repoUrl}`, {
