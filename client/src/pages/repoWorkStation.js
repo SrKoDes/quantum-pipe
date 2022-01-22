@@ -59,6 +59,16 @@ function Row(props) {
   }
   React.useEffect(()=>{getBuildInfo()},[buildProgress])
 
+  async function buildRepo() {
+    const repoUrl = searchParams.get('repoUrl')
+    // Default options are marked with *
+    const response = await fetch(`http://${currentIp}:5000/repoWorkingStation?repoUrl=${repoUrl}`, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      redirected: 'follow'
+
+    });
+    console.log(response.body)
+  }
   return (
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -81,13 +91,7 @@ function Row(props) {
             aria-label="expand row"
             
           >
-            <PlayCircleFilledWhiteIcon fontSize="large" color="primary" />
-          </IconButton>
-          <IconButton
-            aria-label="expand row"
-            
-          >
-            <PauseCircleIcon fontSize="large" color="primary" />
+            <PlayCircleFilledWhiteIcon onClick={buildRepo} fontSize="large" color="primary" />
           </IconButton>
           <IconButton
             aria-label="expand row"
