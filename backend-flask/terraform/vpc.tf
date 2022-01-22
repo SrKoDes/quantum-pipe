@@ -10,7 +10,7 @@ resource "aws_instance" "EC2" {
   vpc_security_group_ids = [aws_security_group.ssh.id, aws_security_group.flask.id]
 
   tags = {
-    Name = "Pipe In a Pipe"
+    Name = "User_App"
   }
 }
 
