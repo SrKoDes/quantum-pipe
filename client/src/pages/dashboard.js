@@ -6,7 +6,7 @@ import Link from '@mui/material/Link';
 import { Card, Container } from '@mui/material';
 import BasicCard from '../components/profileCard';
 import loadingLogo from '../images/pipelogogif.gif'
-import ipAddress from '../client_ip.txt'
+import ipAddress from '../tf_ec2_ip.txt'
 
 function Copyright(props) {
   return (
