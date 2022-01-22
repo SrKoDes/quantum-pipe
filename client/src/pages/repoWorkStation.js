@@ -136,9 +136,9 @@ function Row(props) {
                   overflow: 'auto'
                 }}
               >
-            <Typography sx={{color:'#fff', width: '50%' }}>
-            {buildProgress}
-            </Typography>
+           
+            <img src='https://media.giphy.com/media/V4NSR1NG2p0KeJJyr5/giphy.gif'></img>
+            
               </Box>
             </div> )
                 :
