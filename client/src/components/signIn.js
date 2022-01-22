@@ -79,7 +79,7 @@ export default function SignIn() {
         >
          <img src={Logo} style={{height:'200px',backgroundColor:'#243543',borderRadius:'30px',padding:'3%'}}/>
          <Typography component="h1" variant="h3">
-            Pipe in a Pipe
+            Quantum Pipe
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <Typography component="h2" variant="h5">
