@@ -52,7 +52,7 @@ jobs:
               cp ../client_ip.txt client/src
               cp ../tf_ec2_ip.txt client/src
               cp ../client_ip.txt backend-flask
-              scp -i ../pipe_ssh -o StrictHostKeyChecking=no backend-flask/ ubuntu@$(cat tf_ec2_ip.txt):/home/ubuntu
+              scp -i ../pipe_ssh -o StrictHostKeyChecking=no backend-flask/ ubuntu@$(cat ../tf_ec2_ip.txt):/home/ubuntu
               cd client
               docker build -t react-container . > src/build_progress.txt
               cd ../backend-flask
