@@ -18,7 +18,7 @@ import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import StopCircleIcon from '@mui/icons-material/StopCircle';
-import buildInfo from '../build_progress.txt'
+
 import { useSearchParams } from 'react-router-dom'
 import ipAddress from '../tf_ec2_ip.txt'
 
