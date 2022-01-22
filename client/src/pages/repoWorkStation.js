@@ -51,6 +51,7 @@ function Row(props) {
   ];
 
   const [currentIp, setCurrentIp] = React.useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
 
   function getIp(){
     fetch(ipAddress)
@@ -61,7 +62,7 @@ function Row(props) {
   React.useEffect(()=>{getIp()},[currentIp])
 
   async function buildRepo() {
-    const [searchParams, setSearchParams] = useSearchParams();
+    
     const repoUrl = searchParams.get('repoUrl')
     // Default options are marked with *
     const response = await fetch(`http://${currentIp}:5000/repoWorkingStation?repoUrl=${repoUrl}`, {
