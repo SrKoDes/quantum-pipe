@@ -71,7 +71,7 @@ def displayRepoInfo():
     repoName = request.args.get('repoName')
     return redirect(f'http://{client_ip}:3000/repo-work-station?repoUrl=' + repoUrl + '&repoName='+repoName)
 
-@application.route('/start_deployment')
+@application.route('/start_deployment', methods=['GET'])
 def deploy_app():
     repo_url = request.args.get('repoUrl')
     # framework = request.args.get('framework')
